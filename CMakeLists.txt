@@ -1,7 +1,7 @@
 ## Use the variable PROJECT_NAME for changing the target name
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 string(REPLACE " " "_" ProjectId ${ProjectId})
-set( PROJECT_NAME ${ProjectId} )
+set(PROJECT_NAME ${ProjectId} )
 
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 14)
@@ -27,7 +27,7 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
 )
 
 ## Define the executable
-set(SRCS 
+set(SRCS
   src/main.cpp
 )
 add_executable(${PROJECT_NAME} ${SRCS})
@@ -36,10 +36,14 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 
-add_executable(ukf_test 
+add_executable(ukf_test
   test/ukf_test.cpp
 )
 target_include_directories(ukf_test PUBLIC
  	include
 )
 target_link_libraries(ukf_test ${PROJECT_NAME}_lib)
+
+find_package(Pangolin REQUIRED)
+add_executable(ptj plot_trajectory.cpp)
+target_link_libraries(ptj ${Pangolin_LIBRARIES})
