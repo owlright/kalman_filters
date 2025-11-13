@@ -45,12 +45,11 @@ void KalmanFilter::predict(const Eigen::VectorXd& u) {
 }
 
 void KalmanFilter::update(const Eigen::VectorXd& y) {
-
-	K = P*C.transpose()*(C*P*C.transpose() + R).inverse();
-	x_hat += K * (y - C*x_hat);
-	P = (I - K*C)*P;
+	K = P * C.transpose() * (C * P * C.transpose() + R).inverse();
+	x_hat += K * (y - C * x_hat); // 如果某个状态值没有观测，这里相当于更新只用了观测和预测的差值
+	P = (I - K * C) * P;
 }
 
-Eigen::VectorXd KalmanFilter::get_state() { 
-  return x_hat; 
+Eigen::VectorXd KalmanFilter::get_state() {
+  return x_hat;
 }

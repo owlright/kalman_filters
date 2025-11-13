@@ -20,6 +20,7 @@ public:
   void predict(const Eigen::VectorXd& u);
   void update(const Eigen::VectorXd& y);
   Eigen::VectorXd get_state();
+  Eigen::MatrixXd get_cov() { return P; }
 
 private:
   Eigen::MatrixXd A, B, C, P, R, Q;
