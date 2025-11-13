@@ -3,7 +3,7 @@ get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 string(REPLACE " " "_" ProjectId ${ProjectId})
 set(PROJECT_NAME ${ProjectId} )
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -28,14 +28,9 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
 )
 
 ## Define the executable
-set(SRCS
-  src/main.cpp
-)
-add_executable(${PROJECT_NAME} ${SRCS})
-target_include_directories(${PROJECT_NAME} PUBLIC
- 	include
-)
-target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
+add_executable(ekf_circle examples/ekf_circle.cpp)
+target_include_directories(ekf_circle PUBLIC include)
+target_link_libraries(ekf_circle ${PROJECT_NAME}_lib)
 
 add_executable(ukf_test
   test/ukf_test.cpp
@@ -45,6 +40,7 @@ target_include_directories(ukf_test PUBLIC
 )
 target_link_libraries(ukf_test ${PROJECT_NAME}_lib)
 
+set(Pangolin_DIR /Users/sjh/3rdParty/pangolin/build)
 find_package(Pangolin REQUIRED)
 add_executable(ptj plot_trajectory.cpp)
 target_link_libraries(ptj ${Pangolin_LIBRARIES})
