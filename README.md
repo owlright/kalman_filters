@@ -1,12 +1,16 @@
 # Kalman Filters
 This is a C++ implementation of the Kalman filter and its extension, the extended Kalman filter (EKF) and the unscented Kalman filter (UKF).
 
+只需要设置KF的A，不用设置model
+
 ## Kalman Filter
 
 ## Extended Kalman Filter (EKF)
 
-The extended Kalman filter is an extension of the Kalman filter for nonlinear systems.  
-This technique linearizes a model at a working point using Taylor series expansion. 
+The extended Kalman filter is an extension of the Kalman filter for nonlinear systems.
+This technique linearizes a model at a working point using Taylor series expansion.
+
+雅可比矩阵是通过设置model传入的
 
 ```c++
 #include <ekf.hpp>
@@ -33,7 +37,7 @@ Eigen::MatrixXd P_est = ekf.get_cov();
 
 ## Unscented Kalman Filter (UKF)
 
-The extended Kalman filter requires differentiable models and gives poor performance in highly nonlinear systesm.  
+The extended Kalman filter requires differentiable models and gives poor performance in highly nonlinear systesm.
 The unscented Kalman filter uses a deterministic sampling technique known as the unscented transformation to calculate statistics around the mean. This technique does not require differentiability of models.
 
 ```c++
