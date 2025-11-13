@@ -8,7 +8,7 @@ using namespace std;
 void DrawTrajectory(vector<Isometry3d, Eigen::aligned_allocator<Isometry3d>>);
 
 int main(int argc, char **argv) {
-    std::cout << "Pangolin version: " << PANGOLIN_VERSION_STRING << std::endl;
+    // std::cout << "Pangolin version: " << PANGOLIN_VERSION_STRING << std::endl;
     string trajectory_file = "./pose.txt";
     if (argc > 1) {
         trajectory_file = string(argv[1]);
