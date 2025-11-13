@@ -1,5 +1,4 @@
 #include <stdafx.hpp>
-#include <kalman_filters.hpp>
 #include <ekf.hpp>
 #include <system_simulator.hpp>
 #include <plot_helper.hpp>
@@ -20,8 +19,8 @@ int main(int argc, char const *argv[]) {
 	Q = Q * Q;
 
 	Eigen::MatrixXd R(2, 2);
-	R << 0.5, 0.0, 
-			 0.0, 0.5;
+	R << 0.5, 0.0,
+		 0.0, 0.5;
 
 	R = R * R;
 	double dt = 1.0 / 30.0;
@@ -30,9 +29,9 @@ int main(int argc, char const *argv[]) {
 	sim.init();
 	Eigen::MatrixXd P(4, 4);
 	P << 1.0, 0.0, 0.0, 0.0,
-			 0.0, 1.0, 0.0, 0.0, 
-			 0.0, 0.0, 1.0, 0.0, 
-			 0.0, 0.0, 0.0, 1.0;
+		 0.0, 1.0, 0.0, 0.0,
+		 0.0, 0.0, 1.0, 0.0,
+		 0.0, 0.0, 0.0, 1.0;
 	ExtendedKF ekf(model, P);
 	ekf.init(x0);
 	double t = 0;
@@ -55,10 +54,10 @@ int main(int argc, char const *argv[]) {
 	}
 
 	for (size_t i = 0; i < sim.true_results.size(); i++) {
-		std::cout << dt*i << ", " 
+		std::cout << dt*i << ", "
 							<< sim.true_results[i](0) << ", " << sim.true_results[i](1) << ", "
 							<< sim.obs_results[i](0) << ", " << sim.obs_results[i](1) << ", "
-							<< res[i](0) << ", " << res[i](1) << ", " 
+							<< res[i](0) << ", " << res[i](1) << ", "
 							<< es[i].major_ax << ", " << es[i].minor_ax << ", " << es[i].angle
 							<< std::endl;
 	}
